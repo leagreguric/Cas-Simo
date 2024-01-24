@@ -17,9 +17,10 @@ from mainpage.models import BetHistory
 def roulette(request):
     user = User.objects.get(user=request.user)
     main_account = User.objects.get(username='admin')
-    color_multiplier = Decimal(2.0)  
-    combined_multiplier = Decimal(7.0)  
-    green_multiplier=Decimal(14.0)
+    color_multiplier = Decimal(1.5)  
+    combined_multiplier = Decimal(5.0)  
+    green_multiplier=Decimal(10.0)
+    number_multiplier=Decimal(2.0)
 
     form = RouletteForm() 
     if request.method == "POST":
@@ -96,6 +97,23 @@ def roulette(request):
                     main_account.save()
 
                     messages.success(request, f'You won {bet_amount * combined_multiplier}! The ball landed on {color} {roulette_result}')
+                elif number_win_condition:
+                    user.money+=bet_amount+(bet_amount*number_multiplier)
+                    BetHistory.objects.create(
+                        user=user,
+                        game='Roulette',
+                        bet_amount=bet_amount,
+                        win_amount=bet_amount * number_multiplier,
+                        timestamp=timezone.now(),
+                    )
+                    user.save()
+                    main_account.money-=(bet_amount*number_multiplier)
+                    main_account.save()
+                    messages.success(request, f'You won {bet_amount * number_multiplier}! The ball landed on {color} {roulette_result}')
+
+                                            
+                    
+                    
                 else:
                     messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
                     BetHistory.objects.create(

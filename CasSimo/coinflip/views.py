@@ -12,7 +12,7 @@ from mainpage.models import BetHistory
 def coin_flip(request):
     user = User.objects.get(user=request.user)
     main_account = User.objects.get(username='admin')
-    multiplier = Decimal(2.0)
+    multiplier = Decimal(1.5)
 
     form = CoinFlipForm()
     if request.method == "POST":
