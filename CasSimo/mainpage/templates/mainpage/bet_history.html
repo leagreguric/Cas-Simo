@@ -1,0 +1,26 @@
+{% extends 'mainpage/main.html' %}
+
+{% block content %}
+    <h2>Bet History</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Game</th>
+                <th>Bet Amount</th>
+                <th>Win Amount</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in all_bet_history %}
+                <tr>
+                    <td>{{ entry.game }}</td>
+                    <td>{{ entry.bet_amount }}</td>
+                    <td>{{ entry.win_amount }}</td>
+                    <td>{{ entry.timestamp }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
