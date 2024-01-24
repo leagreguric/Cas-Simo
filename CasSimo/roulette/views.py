@@ -29,6 +29,7 @@ def roulette(request):
             bet_amount = form.cleaned_data['bet_amount']
             bet_color = form.cleaned_data['bet_color']
             bet_number = form.cleaned_data['bet_number']
+            condition=form.cleaned_data['condition']
         
             if user.money >= bet_amount:
                 user.money -= bet_amount
@@ -49,86 +50,146 @@ def roulette(request):
 
                 number_win_condition = (roulette_result == bet_number)
 
-                if color_win_condition and number_win_condition:
-                    user.money += bet_amount + (bet_amount * combined_multiplier)
-                    BetHistory.objects.create(
-                        user=user,
-                        game='Roulette',
-                        bet_amount=bet_amount,
-                        win_amount=bet_amount * combined_multiplier,
-                        timestamp=timezone.now(),
-                    )
-                    user.save()
+                if condition=='all' or condition=='number' or condition=='color':
+                    if green_win_condition:
+                        user.money += bet_amount + (bet_amount *green_multiplier)
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=bet_amount * green_multiplier,
+                            timestamp=timezone.now(),
+                        )
+                        user.save()
 
-                    main_account.money -= (bet_amount * combined_multiplier)
+                        main_account.money -= (bet_amount * green_multiplier)
+                        
+                        main_account.save()
+
+                        messages.success(request, f'You won {bet_amount * combined_multiplier}! The ball landed on {color} {roulette_result}')
+                    else:
+                        messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=Decimal(0),
+                            timestamp=timezone.now(),
+                        )
+                        main_account.money += bet_amount           
+                        main_account.save()
+                        user.save()
+
+
+                elif condition=='all':
+                    if color_win_condition and number_win_condition:
+                        
+                        user.money += bet_amount + (bet_amount * combined_multiplier)
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=bet_amount * combined_multiplier,
+                            timestamp=timezone.now(),
+                        )
+                        user.save()
+                        main_account.money -= (bet_amount * combined_multiplier)
+                        main_account.save()
+                        messages.success(request, f'You won {bet_amount * combined_multiplier}! The ball landed on {color} {roulette_result}')
+
+                    else:
+                        messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=Decimal(0),
+                            timestamp=timezone.now(),
+                        )
+                        main_account.money += bet_amount           
+                        main_account.save()
+                        user.save()
                     
-                    main_account.save()
+                elif condition=='color':
+                    if color_win_condition:
+                        user.money += bet_amount + (bet_amount * color_multiplier)
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=bet_amount * color_multiplier,
+                            timestamp=timezone.now(),
+                        )
+                        user.save()
 
-                    messages.success(request, f'You won {bet_amount * combined_multiplier}! The ball landed on {color} {roulette_result}')
-                elif color_win_condition:
-                    user.money += bet_amount + (bet_amount * color_multiplier)
-                    BetHistory.objects.create(
-                        user=user,
-                        game='Roulette',
-                        bet_amount=bet_amount,
-                        win_amount=bet_amount * color_multiplier,
-                        timestamp=timezone.now(),
-                    )
-                    user.save()
+                        main_account.money -= (bet_amount * color_multiplier)
+                        
+                        main_account.save()
 
-                    main_account.money -= (bet_amount * color_multiplier)
-                    
-                    main_account.save()
+                        messages.success(request, f'You won {bet_amount * color_multiplier}! The ball landed on {color} {roulette_result}')
+                    else:
+                        messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=Decimal(0),
+                            timestamp=timezone.now(),
+                        )
+                        main_account.money += bet_amount           
+                        main_account.save()
+                        user.save()
 
-                    messages.success(request, f'You won {bet_amount * color_multiplier}! The ball landed on {color} {roulette_result}')
-                elif green_win_condition:
-                    user.money += bet_amount + (bet_amount *green_multiplier)
-                    BetHistory.objects.create(
-                        user=user,
-                        game='Roulette',
-                        bet_amount=bet_amount,
-                        win_amount=bet_amount * green_multiplier,
-                        timestamp=timezone.now(),
-                    )
-                    user.save()
+                elif condition=='number':
+                    if number_win_condition:
+                        user.money+=bet_amount+(bet_amount*number_multiplier)
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=bet_amount * number_multiplier,
+                            timestamp=timezone.now(),
+                        )
+                        user.save()
+                        main_account.money-=(bet_amount*number_multiplier)
+                        main_account.save()
+                        messages.success(request, f'You won {bet_amount * number_multiplier}! The ball landed on {color} {roulette_result}')
 
-                    main_account.money -= (bet_amount * green_multiplier)
-                    
-                    main_account.save()
+                    else:
+                        messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=Decimal(0),
+                            timestamp=timezone.now(),
+                        )
+                        main_account.money += bet_amount           
+                        main_account.save()
+                        user.save()
 
-                    messages.success(request, f'You won {bet_amount * combined_multiplier}! The ball landed on {color} {roulette_result}')
-                elif number_win_condition:
-                    user.money+=bet_amount+(bet_amount*number_multiplier)
-                    BetHistory.objects.create(
-                        user=user,
-                        game='Roulette',
-                        bet_amount=bet_amount,
-                        win_amount=bet_amount * number_multiplier,
-                        timestamp=timezone.now(),
-                    )
-                    user.save()
-                    main_account.money-=(bet_amount*number_multiplier)
-                    main_account.save()
-                    messages.success(request, f'You won {bet_amount * number_multiplier}! The ball landed on {color} {roulette_result}')
+
+                        
+            
+                else:
+                        messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
+                        BetHistory.objects.create(
+                            user=user,
+                            game='Roulette',
+                            bet_amount=bet_amount,
+                            win_amount=Decimal(0),
+                            timestamp=timezone.now(),
+                        )
+                        main_account.money += bet_amount           
+                        main_account.save()
+                        user.save()
+
 
                                             
                     
                     
-                else:
-                    messages.error(request, f'Sorry, not this time.. The ball landed on {color} {roulette_result}')
-                    BetHistory.objects.create(
-                        user=user,
-                        game='Roulette',
-                        bet_amount=bet_amount,
-                        win_amount=Decimal(0),
-                        timestamp=timezone.now(),
-                    )
-                    main_account.money += bet_amount
-                    
-                    main_account.save()
 
 
-                    user.save()
             else:
                 messages.error(request, "You don't have enough money")
 

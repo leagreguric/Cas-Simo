@@ -5,7 +5,10 @@ class RouletteForm(forms.Form):
                                     widget=forms.NumberInput(attrs={"class": "form-control",
                                                                     "style": "text-align:center",
                                                                     "step": 0.5}))
-  
+    CONDITION_CHOICE=[('color','color'),('number','number'),('all','all')]
+
+    condition = forms.ChoiceField(choices=CONDITION_CHOICE, required=True,
+                                  widget=forms.Select(attrs={"class": "form-control"}))
 
     CHOICES_COLOR = [('Red', 'Red'), ('Black', 'Black'), ('Green', 'Green')]
     bet_color = forms.ChoiceField(choices=CHOICES_COLOR, required=False,
