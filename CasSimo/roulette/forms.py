@@ -13,8 +13,11 @@ class RouletteForm(forms.Form):
     CHOICES_COLOR = [('Red', 'Red'), ('Black', 'Black'), ('Green', 'Green')]
     bet_color = forms.ChoiceField(choices=CHOICES_COLOR, required=False,
                                   widget=forms.Select(attrs={"class": "form-control"}))
-
+    
     bet_number = forms.IntegerField(min_value=0, max_value=36, required=False,
                                     widget=forms.NumberInput(attrs={"class": "form-control",
                                                                     "style": "text-align:center",
+                                                                    "step":1,
                                                                     "placeholder": "0 - 36"}))
+
+

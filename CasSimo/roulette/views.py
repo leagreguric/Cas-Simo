@@ -50,7 +50,7 @@ def roulette(request):
 
                 number_win_condition = (roulette_result == bet_number)
 
-                if condition=='all' or condition=='number' or condition=='color':
+                if condition=='all'  or condition=='color':
                     if green_win_condition:
                         user.money += bet_amount + (bet_amount *green_multiplier)
                         BetHistory.objects.create(
