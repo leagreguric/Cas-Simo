@@ -1,0 +1,8 @@
+@import 'scss/coinflip.scss';
+@import 'scss/header.scss';
+@import 'scss/base/typography';
+
+* {
+    margin: 0;
+    font-family: $font-primary;
+}

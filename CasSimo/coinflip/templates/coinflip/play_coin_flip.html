@@ -7,40 +7,46 @@
 {% block content %}
 
     <div class="container">
-        <div class="row">
-            <div class="col-sm">
-            </div>
-            <div class="col-sm">
+        
 
-                <div style="text-align:center">
-                    {% for message in messages %}
-                        {% if 'success' in message.tags %}
-                            <div class="alert alert-success" role="alert">
-                              {{ message }}
-                            </div>
-                        {% elif 'error' in message.tags %}
-                            <div class="alert alert-danger" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-
-                    <form method="POST">
-                        {% csrf_token %}
-                        <h2>Bet amount</h2>
-                        {{ form.bet_amount }}<br>
-
-                        <h2>Choose Side</h2>
-                        {{ form.bet_side }}<br>
-
-                        <button type="submit" class="btn btn-success btn-lg btn-block">Flip Coin!</button>
-                    </form>
+        <form method="POST" class="coinflip-form" id="coinFlipForm">
+            
+           
+            {% csrf_token %}
+            <div class="bet-amount">
+                <div id="coin">
+                    <div class="side-heads">
+                    </div>
+                    <div class="side-tails">
+                    </div>
                 </div>
+                {% for message in messages %}
+            {% if 'success' in message.tags %}
+                <div class="alert alert-success" id="message" role="alert">
+                    {{ message }}
+                </div>
+            {% elif 'error' in message.tags %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+                <h2>Bet amount</h2>
+                {{ form.bet_amount }}
+                
+            </div>
+            <div class="coinflip-container">
+                <label id="heads" class="coin-label" onclick="submitForm('id_bet_side_0')">
+                    <div class="side">{{ form.bet_side.0 }}</div>
+                </label>
+                <label id="tails" class="coin-label" onclick="submitForm('id_bet_side_1')">
+                    <div class="side">{{ form.bet_side.1 }}</div>
+                </label>
+            </div>
+        </form>
 
-            </div>
-            <div class="col-sm">
-            </div>
-        </div>
     </div>
+    {% load static %}
+    <script src="{% static 'coinflip/js/submitForm.js' %}"></script>
 
 {% endblock %}
