@@ -5,45 +5,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-
-    <div class="col-sm">
-        <div class="card text-white bg-dark mb-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Add 50$</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Add funds to account</h6>
-                <button type="button" class="btn btn-secondary btn-lg btn-block">
-                    <a href="{% url 'deposit' 50 %}" class="text-light">Deposit 50$</a>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm">
-      <div class="card text-white bg-dark mb-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Add 150$</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Add funds to account</h6>
-                <button type="button" class="btn btn-secondary btn-lg btn-block">
-                    <a href="{% url 'deposit' 150 %}" class="text-light">Deposit 150$</a>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm">
-      <div class="card text-white bg-dark mb-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Add 500$</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Add funds to account</h6>
-                <button type="button" class="btn btn-secondary btn-lg btn-block">
-                    <a href="{% url 'deposit' 500 %}" class="text-light">Deposit 500$</a>
-                </button>
-            </div>
-        </div>
-    </div>
-
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Funds</title>
+</head>
+<body>
+    <div class="container">
+    <h1>Add Funds to User Account</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Funds</button>
+    </form>
 </div>
+</body>
+</html>
+
 {% endblock %}

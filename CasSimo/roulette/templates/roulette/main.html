@@ -25,17 +25,22 @@
                 <li class="nav-item active">
                     <a class="nav-link text-white bg-dark" href="{% url 'mainpage_index' %}">Home</a>
                 </li>
+                {% if  request.user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link text-white bg-dark" href="{% url 'add_funds' %}">Add funds</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link disabled text-white bg-dark">{{ request.user.user.money }}$</a>
-                </li>
-                <li class="nav-item mr-auto">
-                    <a class="nav-link text-white bg-dark" href="{% url 'logout' %}">logout</a>
+                    <div class="nav-link disabled text-white bg-dark">{{ request.user.user.money }}$</div>
                 </li>
                 <li class="nav-item mr-auto">
                     <a class="nav-link text-white bg-dark" href="{% url 'bet_history' %}">Bet history</a>
+                </li>
+                <li class="nav-item mr-auto">
+                    <div class="nav-link text-white bg-dark" >Hello {{ request.user.user.username }}</div>
+                </li>
+                <li class="nav-item mr-auto">
+                    <a class="nav-link text-white bg-dark" href="{% url 'logout' %}">logout</a>
                 </li>
             </ul>
         </div>

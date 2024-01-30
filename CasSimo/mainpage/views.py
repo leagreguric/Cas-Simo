@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import User, BetHistory
-from .forms import CreateUserForm
+from .forms import CreateUserForm, AddFundsForm
 from decimal import Decimal
 
 # Create your views here.
@@ -80,21 +80,33 @@ def index(request):
     return render(request, 'mainpage/bet_history.html', context)
 
 
+
 @login_required(login_url='login')
 def add_funds(request):
-    return render(request, 'mainpage/add_funds.html')
+    if not request.user.is_superuser:
+        return redirect('index.html')
+    
+    else:
+        main_account = User.objects.get(username='admin') 
+        if request.method == 'POST':
+            form = AddFundsForm(request.POST)
+            if form.is_valid():
+                user = form.cleaned_data['user']
+                amount = form.cleaned_data['amount']
+                if (user.username=='admin'):
+                    user.money+=amount
+                    user.save()
+                else:
+                    user.money += amount
+                    main_account.money-=amount
+                    user.save()
+                    main_account.save()
+                return redirect('add_funds')
+        else:
+            form = AddFundsForm()
 
+        return render(request, 'mainpage/add_funds.html', {'form': form})
 
-
-@login_required(login_url='login')
-def deposit(request, amount):
-    user = get_object_or_404(User, user=request.user)
-    main_account = get_object_or_404(User, username='admin')
-    user.money += Decimal(amount)
-    main_account.money -= Decimal(amount)
-    user.save()
-    main_account.save()
-    return render(request, 'mainpage/add_funds.html')
 
 
 @login_required(login_url='login')

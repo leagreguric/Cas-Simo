@@ -25,9 +25,11 @@
                 <li class="nav-item active">
                     <a class="nav-link text-white bg-dark" href="{% url 'mainpage_index' %}">Home</a>
                 </li>
+                {% if  request.user.is_superuser %}
                 <li class="nav-item">
                     <a class="nav-link text-white bg-dark" href="{% url 'add_funds' %}">Add funds</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <div class="nav-link disabled text-white bg-dark">{{ request.user.user.money }}$</div>
                 </li>
