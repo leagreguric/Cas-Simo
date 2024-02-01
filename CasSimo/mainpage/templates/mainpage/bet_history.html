@@ -1,26 +1,30 @@
 {% extends 'mainpage/main.html' %}
 
 {% block content %}
-    <h2>Bet History</h2>
+    <div class="bet-history-container">
+        <div class="bet-history-table-container">
+            <h2 class="table-title">Bet History</h2>
+            <table class="bet-history-table">
+                <thead class="bet-history-header">
+                    <tr >
+                        <th class="bet-history-header-cell">Game</th>
+                        <th class="bet-history-header-cell">Bet Amount</th>
+                        <th class="bet-history-header-cell">Win Amount</th>
+                        <th class="bet-history-header-cell">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in all_bet_history %}
+                        <tr class="bet-history-row">
+                            <td class="bet-history-row-cell">{{ entry.game }}</td>
+                            <td class="bet-history-row-cell">{{ entry.bet_amount }}</td>
+                            <td class="bet-history-row-cell">{{ entry.win_amount }}</td>
+                            <td class="bet-history-row-cell">{{ entry.timestamp }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Game</th>
-                <th>Bet Amount</th>
-                <th>Win Amount</th>
-                <th>Timestamp</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in all_bet_history %}
-                <tr>
-                    <td>{{ entry.game }}</td>
-                    <td>{{ entry.bet_amount }}</td>
-                    <td>{{ entry.win_amount }}</td>
-                    <td>{{ entry.timestamp }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 {% endblock %}

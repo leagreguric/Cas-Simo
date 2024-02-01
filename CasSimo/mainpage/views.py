@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
@@ -52,7 +53,7 @@ def login_page(request):
                 login(request, user)
                 return redirect('mainpage_index')
             else:
-                messages.error(request, 'Username of password is incorrect')
+                messages.error(request, 'Username or password is incorrect')
 
     context = {}
 

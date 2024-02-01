@@ -14,11 +14,11 @@
 </head>
 <body>
     <div class="container">
-    <h1>Add Funds to User Account</h1>
-    <form method="post">
+    <h1 class="add-funds-title">Add Funds to User Account</h1>
+    <form method="post" class="add-funds">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Funds</button>
+        <button type="submit" class="login-register-button">Add Funds</button>
     </form>
 </div>
 </body>

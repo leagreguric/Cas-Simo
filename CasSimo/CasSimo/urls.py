@@ -1,5 +1,5 @@
 """
-URL configuration for CasSimo project.
+URL configuration for cassimo project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainpage.urls')),
-    path('coinflip/', include('coinflip.urls')),
-    path('roulette/',include('roulette.urls')),
-]
+    path('', include('games.urls')),
 
+]
