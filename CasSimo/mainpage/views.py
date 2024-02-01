@@ -8,6 +8,7 @@ from .forms import CreateUserForm, AddFundsForm
 from decimal import Decimal
 
 # Create your views here.
+@login_required(login_url='login')
 def home(request):
     context = {}
     return render(request, 'mainpage/index.html', context)

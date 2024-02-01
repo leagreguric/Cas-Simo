@@ -117,7 +117,7 @@ def roulette(request):
 
                 
                 if green_win_condition:
-                    user.money += bet_amount + (bet_amount *green_multiplier)
+                    user.money += (bet_amount *green_multiplier)
                     BetHistory.objects.create(
                         user=user,
                         game='Roulette',
@@ -138,7 +138,7 @@ def roulette(request):
                 elif condition=='all':
                     if color_win_condition and number_win_condition:
                         
-                        user.money += bet_amount + (bet_amount * combined_multiplier)
+                        user.money += (bet_amount * combined_multiplier)
                         BetHistory.objects.create(
                             user=user,
                             game='Roulette',
@@ -166,7 +166,7 @@ def roulette(request):
                     
                 elif condition=='color':
                     if color_win_condition:
-                        user.money += bet_amount + (bet_amount * color_multiplier)
+                        user.money += (bet_amount * color_multiplier)
                         BetHistory.objects.create(
                             user=user,
                             game='Roulette',
@@ -196,7 +196,7 @@ def roulette(request):
 
                 elif condition=='number':
                     if number_win_condition:
-                        user.money+=bet_amount+(bet_amount*number_multiplier)
+                        user.money+=(bet_amount*number_multiplier)
                         BetHistory.objects.create(
                             user=user,
                             game='Roulette',

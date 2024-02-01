@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'cassimo.urls'
+ROOT_URLCONF = 'CasSimo.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cassimo.wsgi.application'
+WSGI_APPLICATION = 'CasSimo.wsgi.application'
 
 
 # Database
