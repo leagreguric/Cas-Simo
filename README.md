@@ -86,7 +86,7 @@ Specifications (IEEE, 1998).
 2. **Overall<a name="_page3_x127.56_y150.65"></a> Description**
 1. **Product<a name="_page3_x127.56_y174.48"></a> Perspective**
 
-“Cas-Simo” is a standalone web application that allows users to play games of chance. Admins have control over the system and can monitor all activities. The user interface is designed to be intuitive and easy to use, with an Admin dashboard, User dashboard, and a homepage with all available games to be played. Users will also be able to see their bet history and their current balance. “Cas-Simo” is a self-contained web application that will be hosted on a web server. It will be accessible through a web browser.
+“Cas-Simo” is a standalone web application that allows users to play games of chance. Admins have control over the system and can monitor all activities. The user interface is designed to be intuitive and easy to use, a homepage with all available games to be played. Users will also be able to see their bet history and their current balance. “Cas-Simo” is a self-contained web application that will be hosted on a web server. It will be accessible through a web browser.
 
 2. **Product<a name="_page3_x127.56_y365.02"></a> Functions**
 
@@ -128,11 +128,11 @@ The application will use a cryptocurrency token to handle payments. For the firs
 1. **Functional<a name="_page4_x127.56_y657.50"></a> Requirements: User Requirements**
 1. **User<a name="_page4_x127.56_y689.34"></a> Registration**
 
-Req U1 - The web application will allow users to register for an account. The web application will allow users to register for an account. Users will provide their name, email address, and password. The web application will verify that the email address is unique and not already used by another user.
+Req U1 - The web application will allow users to register for an account. The web application will allow users to register for an account. Users will provide their username and password. 
 
 2. **User<a name="_page5_x127.56_y145.08"></a> Login**
 
-Req U2 - The web application will allow users to log in to their account. The web application will allow users to log in to their account. Users will provide their email address and password. The web application will verify that the email address and password match the information in the database.
+Req U2 - The web application will allow users to log in to their account. The web application will allow users to log in to their account. Users will provide their username and password. The web application will verify that the username and password match the information in the database.
 
 3. **User<a name="_page5_x127.56_y284.81"></a> Logout**
 
@@ -140,27 +140,19 @@ Req U3 - The web application will allow users to log out of their account. The w
 
 4. **User<a name="_page5_x127.56_y410.27"></a> Dashboard**
 
-Req U4 - The web application will provide a dashboard for users to view their account information and manage their jobs. The web application will provide a dashboard for users to view their account information and manage their jobs. The dashboard will include the following information:
+Req U4 - The web application will provide a dashboard for users to view their account information. The web application will provide a dashboard for users to view their account information. The dashboard will include the following information:
 
-- User’s name
-- User’s email address
+- User’s username
 - User’s token balance
 - List of previous bets
-5. **User<a name="_page5_x127.56_y624.81"></a> Profile**
 
-Req U5 - The web application will provide a profile for users to view their account information. The web application will provide a profile for users to view their account information. The profile will include the following information:
+5. **Bet<a name="_page6_x127.56_y138.81"></a> Placing**
 
-- User’s name
-- User’s email address
-- User’s token balance
-- User’s rating
-6. **Bet<a name="_page6_x127.56_y138.81"></a> Placing**
+Req U5 - The player will be able to bet if there is enough money on the account. If there is not enough money, the system shall notify the player and take him/her to the account recharge page. Upon successful betting, the system will confirm to the user details of the game. The player shall be able to check the details in the Bet History.
 
-Req U6 - The player will be able to bet if there is enough money on the account. If there is not enough money, the system shall notify the player and take him/her to the account recharge page. Upon successful betting, the system will confirm to the user details of the game. The player shall be able to check the details in the Bet History.
+6. **Bet<a name="_page6_x127.56_y278.54"></a> History**
 
-7. **Bet<a name="_page6_x127.56_y278.54"></a> History**
-
-Req U7 - The user can see their own bet history of all games that they’ve played. Admin users can see every user’s bet history.
+Req U6 - The user can see their own bet history of all games that they’ve played. Admin users can see every user’s bet history.
 
 2. **Functional<a name="_page6_x127.56_y375.46"></a> Requirements: Admin Requirements**
 1. **Admin<a name="_page6_x127.56_y399.29"></a> Dashboard**
@@ -168,20 +160,20 @@ Req U7 - The user can see their own bet history of all games that they’ve play
 Req A1 - The web application will provide a dashboard for admins to manage the system. The web application will provide a dashboard for admins to manage the system. The dashboard will use the Django Admin interface. The dashboard will allow admins to manage the following:
 
 - Users (create, edit, delete)
-- Games (create, edit, delete)
+- Bet History (create, edit, delete)
 - Apply a token balance to a user
 2. **Apply<a name="_page6_x127.56_y599.56"></a> a Token Balance to a User**
 
 Req A2 - The web application will allow admins to apply a token balance to a user. The web application will allow the admins to find a user in the Admin dashboard and to change the user’s token balance. The web application will update the user’s token balance in the database. The web application will display the new token balance on the user’s dashboard.
 
-**Constraints and considerations:** The token balance is used for payments in the system. The token balance is applied to the user’s account when the user wins a bet. The token balance is deducted from the user’s account when the user posts a job. The deposit and withdrawal of the tokens is outside the scope of this application. In this version of the application there won’t be any real currency involved.
+**Constraints and considerations:** The token balance is used for payments in the system. The token balance is applied to the user’s account when the user wins a bet. The deposit and withdrawal of the tokens is outside the scope of this application. In this version of the application there won’t be any real currency involved.
 
 Note: The token balance is not a currency (yet). The token balance is a number that represents the number of tokens that the user has in their account. The token balance is used for payments in the system.
 
 3. **Functional<a name="_page8_x127.56_y72.00"></a> Requirements: Game Requirements**
 1. **Game<a name="_page8_x127.56_y91.84"></a> Playing: Roulette**
 
-Req G1 - Users can place bets on specific colors in the roulette game.
+Req G1 - Users can place bets on specific colors, numbers or both in the roulette game.
 
 2. **Game<a name="_page8_x127.56_y175.34"></a> Playing: Coin flip**
 
@@ -208,19 +200,19 @@ The top navigation bar will have the following links:
 
 - On the left side:
   - Logo
-  - Games
 - On the right side:
 - Login (a link to the Login page) if the user is not logged in
-- Profile (a link to the Profile page) if the user is logged in
+- Profile (a link to the Bet history page) if the user is logged in
+- Add funds (a link to the Add funds page) if the user is an admin
+- User balance
 - Logout (a link to the Logout page) if the user is logged in
-- Bet History (a link to the Bet History page) if the user is logged in
 2. **Hardware<a name="_page10_x127.56_y481.62"></a> Interfaces**
 
 The application will be hosted on a secure web server running on Linux or Windows.
 
 3. **Software<a name="_page10_x127.56_y564.27"></a> Interfaces**
 
-The application will use Django 4.1, the database will be SQLite, and the frontend framework will be Bootstrap.
+The application will use Django 4.1, the database will be SQLite, and the frontend will be written with SCSS and jQuery.
 
 4. **Communications<a name="_page10_x127.56_y646.92"></a> Interfaces**
 
