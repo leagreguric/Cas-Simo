@@ -1,4 +1,4 @@
-﻿**IEEE 830-1998 Software Requirements Specification „Cas-Simo: A casino simulator“**
+**IEEE 830-1998 Software Requirements Specification „Cas-Simo: A casino simulator“**
 
 Lea Gregurić David Mikulić
 
