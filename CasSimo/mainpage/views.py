@@ -67,19 +67,7 @@ def logout_page(request):
     return redirect('login')
 
 
-@login_required(login_url='login')
-def index(request):
-    user = User.objects.get(user=request.user)
 
-    labels = ['win', 'lose', 'draw']
-    data = [user.win, user.lose, user.draw]
-
-    context = {
-        'labels': labels,
-        'data': data
-    }
-
-    return render(request, 'mainpage/bet_history.html', context)
 
 
 
