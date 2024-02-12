@@ -102,10 +102,8 @@ def add_funds(request):
 @login_required(login_url='login')
 def bet_history(request):
     if request.user.is_staff:
-        # Admin user, fetch all bet history
         all_bet_history = BetHistory.objects.all().order_by('-timestamp')
     else:
-        # Regular user, filter bet history by the current user
         user_profile = User.objects.get(user=request.user)
         all_bet_history = BetHistory.objects.filter(user=user_profile).order_by('-timestamp')
 

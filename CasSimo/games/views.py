@@ -26,7 +26,6 @@ def coin_flip(request):
             
             bet_amount = form.cleaned_data['bet_amount']
             bet_side = form.cleaned_data['bet_side']
-            messages.info(request, 'test')
 
 
             if user.money >= bet_amount:
